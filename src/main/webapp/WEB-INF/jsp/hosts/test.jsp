@@ -24,27 +24,15 @@
 
 <nav>
     <div class="nav-wrapper">
-        <a href="${pageContext.request.contextPath}/test" class="brand-logo center">JDeploy自动化部署平台</a>
+        <a href="${pageContext.request.contextPath}/" class="brand-logo center">JDeploy自动化部署平台</a>
     </div>
 </nav>
 
 <div class="container" style="padding-top: 20px; width: 90%;flex: 1 0 auto;">
     <div id="java-web-deploy" class="row">
         <div class="row">
-            <div class="input-field col s12 m6 offset-m2">
-                <nav>
-                    <div class="nav-wrapper">
-                        <div class="input-field" style="height: 100%">
-                            <input id="java-web-deploy-search" type="search">
-                            <label for="java-web-deploy-search">
-                                <i class="material-icons" style="line-height: inherit;">search</i>
-                            </label>
-                        </div>
-                    </div>
-                </nav>
-            </div>
             <div class="input-field col s12 m4">
-                <a class="waves-effect waves-light btn red lighten-2" href="${pageContext.request.contextPath}/javawebdeploy/new" style="line-height: 64px; height: 64px;">创建</a>
+                <a class="waves-effect waves-light btn red lighten-2" href="${pageContext.request.contextPath}/hosts/new" style="line-height: 64px; height: 64px;">创建</a>
             </div>
         </div>
         <table class="hoverable">
@@ -62,7 +50,7 @@
                     <td>${item.name}</td>
                     <td>${item.hostId}</td>
                     <td>${item.path}</td>
-                    <td><a href="${pageContext.request.contextPath}/" class="btn waves-effect waves-light red lighten-2">管理</a></td>
+                    <td><a href="${pageContext.request.contextPath}/hosts/${item.hostId}" class="btn waves-effect waves-light red lighten-2">管理</a></td>
                     <%--<td><a href="${pageContext.request.contextPath}/${item.path}" class="btn waves-effect waves-light red lighten-2">管理</a></td>--%>
                 </tr>
             </c:forEach>

@@ -1,6 +1,7 @@
 package com.xxg.jdeploy.service;
 
 import com.xxg.jdeploy.domain.JavaHostInfo;
+import com.xxg.jdeploy.domain.JavaWebDeployInfo;
 import com.xxg.jdeploy.mapper.JavaDeployMapper;
 import com.xxg.jdeploy.mapper.JavaHostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +21,9 @@ public class JavaHostService {
     public List<JavaHostInfo> getHosts() {
         return javaHostMapper.getHosts();
     }
+
+    public List<JavaWebDeployInfo> getHostApps(String uuid) {
+        return javaHostMapper.getHostApps(uuid);
+    }
+
 }

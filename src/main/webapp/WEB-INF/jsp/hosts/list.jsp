@@ -1,10 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: Chance
-  Date: 2017/5/13
-  Time: 下午12:44
+  Date: 2017/5/14
+  Time: 下午2:33
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -14,21 +15,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
-    <title>test</title>
+    <title>Hosts - JDeploy</title>
     <link rel="stylesheet" href="http://cdn.bootcss.com/materialize/0.97.0/css/materialize.min.css">
     <link href="${pageContext.request.contextPath}/resources/css/icon.css" rel="stylesheet">
     <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/materialize/0.97.0/js/materialize.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 </head>
 <body style="font-family: 'Roboto', 'Droid Sans Fallback', '微软雅黑'; min-height: 100vh;display: flex;flex-direction: column;">
 
 <nav>
     <div class="nav-wrapper">
-        <a href="${pageContext.request.contextPath}/test" class="brand-logo center">JDeploy自动化部署平台</a>
+        <a href="${pageContext.request.contextPath}/" class="brand-logo center">JDeploy自动化部署平台</a>
     </div>
 </nav>
 
 <div class="container" style="padding-top: 20px; width: 90%;flex: 1 0 auto;">
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s6"><a href="#java-web-deploy">Java Web项目部署</a></li>
+            </ul>
+        </div>
+    </div>
+
     <div id="java-web-deploy" class="row">
         <div class="row">
             <div class="input-field col s12 m6 offset-m2">
@@ -50,25 +60,27 @@
         <table class="hoverable">
             <thead>
             <tr>
-                <td>主机名称</td>
-                <td>主机ID</td>
-                <td>路径</td>
-                <td>操作</td>
+                <td>项目名称</td>
+                <td>UUID</td>
+                <td>contextPath</td>
+                <td>端口号</td>
+                <td>详情</td>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="item" items="${javaHostList}">
+            <c:forEach var="item" items="${javaHostApps}">
                 <tr>
                     <td>${item.name}</td>
-                    <td>${item.hostId}</td>
-                    <td>${item.path}</td>
-                    <td><a href="${pageContext.request.contextPath}/" class="btn waves-effect waves-light red lighten-2">管理</a></td>
-                    <%--<td><a href="${pageContext.request.contextPath}/${item.path}" class="btn waves-effect waves-light red lighten-2">管理</a></td>--%>
+                    <td>${item.uuid}</td>
+                    <td>${item.contextPath}</td>
+                    <td>${item.port}</td>
+                    <td><a href="${pageContext.request.contextPath}/javawebdeploy/detail/${item.uuid}" class="btn waves-effect waves-light red lighten-2">详情</a></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
+
 </div>
 
 <footer class="page-footer" style="padding-top: 0; margin-top: 40px;">
@@ -82,3 +94,4 @@
 
 </body>
 </html>
+uuid:${uuid}
