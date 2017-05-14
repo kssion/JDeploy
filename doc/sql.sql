@@ -1,16 +1,11 @@
-
+create database `db_jdeploy`;
+use `db_jdeploy`;
 CREATE TABLE `java_web_host` (
   `hostId` varchar(36) NOT NULL COMMENT '主机id',
   `name` varchar(255) NOT NULL COMMENT '主机名称',
   `path` varchar(255) COMMENT '主机路径,相对于webapps',
-  PRIMARY KEY (`host_id`)
+  PRIMARY KEY (`hostId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-ALTER TABLE db_jdeploy.java_web_deploy ADD host_id VARCHAR(36) NOT NULL;
-ALTER TABLE db_jdeploy.java_web_deploy
-  ADD CONSTRAINT java_web_deploy_java_web_host_host_id_fk
-FOREIGN KEY (hostId) REFERENCES java_web_host (hostId);
-
 
 CREATE TABLE `java_deploy` (
   `uuid` varchar(36) NOT NULL COMMENT 'UUID',
@@ -33,5 +28,11 @@ CREATE TABLE `java_web_deploy` (
   `branch` varchar(255) COMMENT 'git branch',
   `context_path` varchar(255) NOT NULL COMMENT 'Web项目contextPath',
   `port` int(11) NOT NULL COMMENT '端口号',
+  `hostId` varchar(36) NOT NULL COMMENT '所属主机id 外键(java_web_host)',
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE db_jdeploy.java_web_deploy ADD hostId VARCHAR(36) NOT NULL;
+ALTER TABLE db_jdeploy.java_web_deploy
+  ADD CONSTRAINT java_web_deploy_java_web_host_hostId_fk
+FOREIGN KEY (hostId) REFERENCES java_web_host (hostId);
