@@ -1,8 +1,7 @@
 package com.xxg.jdeploy.domain;
 
-import org.springframework.context.annotation.Description;
-
 /**
+ * 主机对象
  * Created by Chance on 2017/5/13.
  */
 public class JavaHostInfo {

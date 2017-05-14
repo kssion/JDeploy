@@ -26,9 +26,6 @@ public class JavaWebDeployService {
 	@Value("${javawebdeploy.basepath}")
 	private String basePath;
 
-	@Value("${javawebdeploy.jettypath}")
-	private String jettyPath;
-
 	public List<JavaWebDeployInfo> getList() {
 		return javaWebDeployMapper.getList();
 	}
@@ -65,7 +62,7 @@ public class JavaWebDeployService {
 				contextPath = "root";
 			}
 			
-			String[] cmdArray = {"sh", shellFileFolder + "/package.sh", info.getUuid(), info.getUrl(), jettyPath, basePath, String.valueOf(info.getType()), info.getProfile(), info.getBranch()};
+			String[] cmdArray = {"sh", shellFileFolder + "/package.sh", info.getUuid(), info.getUrl(), basePath, String.valueOf(info.getType()), info.getProfile(), info.getBranch()};
 			sb.append(ShellUtil.exec(cmdArray));
 
 			String module = "";
@@ -97,7 +94,7 @@ public class JavaWebDeployService {
 			// kill进程
 			sb.append(ShellUtil.exec("sh " + shellFileFolder + "/kill.sh " + info.getUuid()));
 			// 启动程序
-			sb.append(ShellUtil.exec("sh " + shellFileFolder + "/start.sh " + info.getUuid() + " " + info.getPort() + " " + jettyPath + " " + basePath));
+			sb.append(ShellUtil.exec("sh " + shellFileFolder + "/start.sh " + info.getUuid() + " " + info.getPort() + " " + basePath));
 			return sb.toString();
 		} else {
 			return uuid + "对应的项目不存在！";

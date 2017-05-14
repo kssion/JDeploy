@@ -6,9 +6,6 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * Created by Chance on 2017/5/13.
- */
 public interface JavaHostMapper {
 
     @Select("SELECT hostId,name,path FROM java_web_host")

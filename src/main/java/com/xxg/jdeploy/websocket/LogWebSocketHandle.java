@@ -1,6 +1,5 @@
 package com.xxg.jdeploy.websocket;
 
-import com.xxg.jdeploy.service.JavaDeployService;
 import com.xxg.jdeploy.service.JavaWebDeployService;
 import com.xxg.jdeploy.util.QueryStringParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,23 +21,14 @@ public class LogWebSocketHandle extends AbstractWebSocketHandler {
     private JavaWebDeployService javaWebDeployService;
 
     @Autowired
-    private JavaDeployService javaDeployService;
-
-    @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        String type = QueryStringParser.parse(session.getUri().getQuery()).get("type");
         String uuid = QueryStringParser.parse(session.getUri().getQuery()).get("uuid");
 
         String command = "echo \"参数错误\"";
-        if("java".equals(type)) {
-            command = javaDeployService.showLog(uuid);
-        } else if("javaweb".equals(type)) {
-            command = javaWebDeployService.showLog(uuid);
-        }
-
+        command = javaWebDeployService.showLog(uuid);
         Process process = Runtime.getRuntime().exec(command);
         LogThread thread = new LogThread(process, session);
         threadPoolTaskExecutor.execute(thread);
