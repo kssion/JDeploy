@@ -1,6 +1,6 @@
 
 CREATE TABLE `java_web_host` (
-  `host_id` varchar(36) NOT NULL COMMENT '主机id',
+  `hostId` varchar(36) NOT NULL COMMENT '主机id',
   `name` varchar(255) NOT NULL COMMENT '主机名称',
   `path` varchar(255) COMMENT '主机路径,相对于webapps',
   PRIMARY KEY (`host_id`)
